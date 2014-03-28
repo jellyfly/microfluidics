@@ -1,4 +1,10 @@
-SIMULATION neurotransmitter-sensing BEGIN
+CHOREOGRAPHY neurotransmitter-sensing BEGIN
+
+ENVSETLIST:
+	TIME:92s,
+	RESERVOIRS:3
+	ALSOC:2.5cm * 1.5cm
+ENDLIST;
 
 USELIST:
 	mixer1,
@@ -35,4 +41,4 @@ DOLIST:
 	SENSE sensor1, RESULT USING FL
 ENDLIST;
 
-ENDSIM;
+ENDCHORE;

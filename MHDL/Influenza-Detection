@@ -1,4 +1,10 @@
-SIMULATION glucose-detection BEGIN
+CHOREOGRAPHY glucose-detection BEGIN
+
+ENVSETLIST:
+	TIME:?
+	RESERVOIRS:?
+	ALSOC: ? * ?
+ENDLIST;
 
 USELIST:
 	flu_diagnoses
@@ -53,4 +59,4 @@ DOLIST:
 	FLUSH B3
 ENDLIST;
 
-ENDSIM;
+ENDCHORE;

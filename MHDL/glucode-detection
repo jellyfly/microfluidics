@@ -1,4 +1,10 @@
-SIMULATION glucose-detection BEGIN
+CHOREOGRAPHY glucose-detection BEGIN
+
+ENVSETLIST:
+	TIME:275s
+	RESERVOIRS:3
+	ALSOC:? * ?
+ENDLIST;
 
 USELIST:
 	mixer1,
@@ -38,4 +44,4 @@ DOLIST:
 	}
 ENDLIST;
 
-ENDSIM;
+ENDCHORE;
