@@ -1,0 +1,42 @@
+SIMULATION PCR BEGIN
+
+USELIST:
+	heater1,
+	separator1,
+	sensor1,
+ENDLIST;
+
+PORTLIST
+	ip1 INPUT,
+	ip2 INPUT,
+ENDLIST;
+
+INSTANLIST:
+	s1, ip1,
+	s2, ip2,
+	heater1, heater1,
+	separator1, separator1,
+	sensor1, sensor1,
+	buf, buf OF separator2,
+ENDLIST;
+
+INTERLIST:
+	ARRAY RESULT[] {},
+ENDLIST;
+
+DOLIST:
+	MOVE heater1, s1
+	
+	REPEAT DRY 20{
+		INCUBATE heater1, 95, 5
+		INCUBATE heater1, 53, 15
+		INCUBATE heater1, 72, 10
+	}
+	
+	MOVE buf, s2
+	MOVE separator1, heater1
+	SEPARATE separator1, 236, 5, 180 USING CE
+	SENSE sensor1, RESULT USING FL
+ENDLIST;
+
+ENDSIM;

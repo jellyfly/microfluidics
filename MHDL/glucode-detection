@@ -1,0 +1,41 @@
+SIMULATION glucose-detection BEGIN
+
+USELIST:
+	mixer1,
+	sensor1,
+ENDLIST;
+
+CONNECTIONLIST:
+ENDLIST;
+
+PORTLIST
+	ip1 INPUT,
+	ip2 INPUT,
+	ip3 INPUT,
+ENDLIST;
+
+INSTANLIST:
+	s1, ip1,
+	s2, ip2,
+	s3, ip3,
+	mixer1, mixer1,
+	sensor1, sensor1,
+ENDLIST;
+
+INTERLIST:
+	ARRAY RESULT[5] {},
+	INT X 1,
+ENDLIST;
+
+DOLIST:
+	REPEAT 5 {
+		MOVE mixer1, s1, 1
+		MOVE mixer1, s2, X
+		MIX mixer1, 10
+		MOVE sensor1, mixer1
+		SENSOR sensor1, RESULT[X]
+		MUL X, X, 2;
+	}
+ENDLIST;
+
+ENDSIM;

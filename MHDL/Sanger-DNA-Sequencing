@@ -1,0 +1,56 @@
+SIMULATION Sanger-DNA-Sequencing BEGIN
+
+USELIST:
+	heater1,
+	separator1,
+	separator2,
+	sensor1,
+ENDLIST;
+
+CONNECTIONLIST:
+ENDLIST;
+
+PORTLIST
+	ip1 INPUT,
+	ip2 INPUT,
+	ip3 INPUT,
+ENDLIST;
+
+INSTANLIST:
+	s1, ip1,
+	s2, ip2,
+	s3, ip3,
+	heater1, heater1,
+	separator1, separator1,
+	separator2, separator2,
+	sensor1, sensor1,
+	flowthrough, flow-through OF separator1,
+	gel, gel OF separator1,
+	buf, buf OF separator2,
+ENDLIST;
+
+INTERLIST:
+	ARRAY RESULT[] {},
+ENDLIST;
+
+DOLIST:
+	MOVE heater1, s3
+	
+	REPEAT DRY 35{
+		INCUBATE heater1, 95, 12
+		INCUBATE heater1, 60, 55
+	}
+	
+	MOVE gel, s1
+	MOVE separator1, heater1
+	SEPARATE separator1, 1200 USING AF
+	DISPOSE flowthrough
+	
+	MOVE buf, s2
+	MOVE separator2, separator1
+	SEPARATE separator2, 167, 30, 2040 USING CE
+	
+	SENSE sensor1, RESULT USING FL
+ENDLIST;
+
+ENDSIM;

@@ -1,0 +1,50 @@
+SIMULATION Imaging-Probe-Synthesis BEGIN
+
+USELIST:
+	mixer1,
+	heater1,
+ENDLIST;
+
+PORTLIST
+	ip1 INPUT,
+	ip2 INPUT,
+	ip3 INPUT,
+	ip4 INPUT,
+ENDLIST;
+
+INSTANLIST:
+	s1, ip1,
+	s2, ip2,
+	s3, ip3,
+	s4, ip4,
+	heater1, heater1,
+	mixer1, mixer1,
+ENDLIST;
+
+DOLIST:
+	MOVE mixer1, s1
+	MOVE mixer1, s2
+	MIX mixer1, 30
+	
+	MOVE heater1, mixer1
+	CONCENTRATE heater1, 100, 30 USING EV
+	CONCENTRATE heater1, 120, 30 USING EV
+	CONCENTRATE heater1, 135, 180 USING EV
+	
+	MOVE mixer1, s3
+	MOVE mixer1, heater1
+	MIX mixer1, 30
+	
+	MOVE heater1, mixer1
+	INCUBATE heater1, 100, 30
+	INCUBATE heater1, 120, 50
+	
+	MOVE mixer1, heater1
+	MOVE mixer1, s4
+	MIX mixer1, 60
+	
+	MOVE heater1, mixer1
+	CONCENTRATE heater1, 60, 60 USING EV
+ENDLIST;
+
+ENDSIM;
